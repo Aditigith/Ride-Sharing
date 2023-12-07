@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Ride Sharing Login & Registration</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: lightseagreen;
+        }
+
+        #header {
+            width: 100%;
+            height: 120vh;
+            background-image: url(Background\ image.jpg);
+            background-size: cover;
+            background-position: center;
+        }
+
+        .container2 {
+            padding: 6px 8%;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            width: 200px;
+        }
+
+        nav ul li {
+            display: inline-block;
+            list-style: none;
+            margin: 20px 20px;
+        }
+
+        nav ul li a {
+            color: black;
+            text-decoration: none;
+            font-size: 30px;
+            position: relative;
+        }
+
+        nav ul li a::after {
+            content: '';
+            width: 0%;
+            height: 3px;
+            background: brown;
+            position: absolute;
+            left: 0;
+            bottom: -4px;
+            transition: 0.5s;
+        }
+
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+
+        .header-text {
+            margin-top: 8%;
+            font-size: 30px;
+        }
+
+        .header-text h1 {
+            font-size: 60px;
+            margin-top: 20px;
+        }
+
+        .header-text h1 span {
+            color: #ff004c;
+        }
+
+        .container {
+            background-image: url(peer.jpg);
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: all 0.5s ease;
+            /* Added transition for smooth animation */
+        }
+
+        .container.minimized {
+            max-width: 0;
+            padding: 0;
+            border: none;
+            opacity: 0;
+            overflow: hidden;
+        }
+
+        .h2-title {
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        h2 {
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"],
+        input[type="tel"] {
+            width: 90%;
+            padding: 10px;
+            margin-top: 5px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+
+        .btn {
+            background-color: white;
+            color: black;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: greenyellow;
+        }
+
+        .switch-btn {
+            background-color: #fff;
+            color: #007bff;
+            border: 1px solid #007bff;
+        }
+
+        .switch-btn:hover {
+            background-color: #007bff;
+            color: #fff;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background-color: #fff;
+            max-width: 300px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .modal-form {
+            text-align: center;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            cursor: pointer;
+        }
+
+        .services-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-gap: 40px;
+            margin-top: 50px;
+        }
+
+        .services-list div {
+            background-color: powderblue;
+            padding: 40px;
+            font-size: 13px;
+            font-weight: 300;
+            border-radius: 10px;
+            transition: background 0.5s, transform 0.5s;
+            color: black;
+        }
+
+        .services-list div i {
+            font-size: 50px;
+            margin-bottom: 30px;
+            color: black;
+        }
+
+        .services-list div h2 {
+            font-size: 30px;
+            font-weight: 500;
+            margin-bottom: 15px;
+            color: black;
+        }
+
+        .services-list div a {
+            text-decoration: none;
+            color: black;
+            font-size: 12px;
+            margin-top: 20px;
+            display: inline-block;
+        }
+
+        .services-list div:hover {
+            background: rgb(182, 231, 255);
+            transform: translateY(-10px);
+        }
+
+        .sub-title {
+            font-size: 50px;
+            font-weight: 600;
+            text-align: center;
+            color: black;
+            /* Set text color to white */
+            margin-top: auto;
+        }
+
+        .btn5 {
+            display: block;
+            margin: 50px auto;
+            width: fit-content;
+            border: 1px solid black;
+            background-color: cornflowerblue;
+            padding: 14px 50px;
+            border-radius: 6px;
+            text-decoration: none;
+            color: black;
+            transition: background 0.5s;
+        }
+
+        .btn:hover {
+            background: greenyellow;
+        }
+
+        .header-text {
+            padding: 0% 2%;
+        }
+
+        .header-text form {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        #City {
+            width: 20%;
+            padding: 10px;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            background-color: white;
+        }
+
+        .header-text input[type="submit"] {
+            width: 20%;
+            padding: 10px;
+            background-color: white;
+            color: black;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        .header-text input[type="submit"]:hover {
+            background-color: gray;
+        }
+
+        .header-text input[type="button"] {
+            width: 20%;
+            padding: 10px;
+            background-color: gray;
+            border: 1px solid black;
+            border-radius: 6px;
+            color: black;
+            cursor: pointer;
+            transition: background 0.5s;
+        }
+
+        .header-text input[type="button"]:hover {
+            background: gray;
+        }
+
+        .header-text {
+            margin-top: 4%;
+            /* Adjust the percentage to your preference */
+            font-size: 30px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="header">
+        <div class="container2">
+            <nav>
+                <img src="logo.png" class="logo">
+                <ul>
+                    <li><a href="index.html#header">Home</a></li>
+                    <li><a href="About.html">About</a></li>
+                    <li><a href="service.html">Service</a></li>
+                    <li><a href="project.html">Project</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+            <div class="header-text">
+                <form action="/action.php">
+                    <select name="city" id="City">
+                        <option value="Departure">DEPARTURE</option>
+                        <option value="Delhi">Delhi</option>
+                        <option value="Mumbai">Mumbai</option>
+                        <option value="Pune">Pune</option>
+                        <option value="Lucknow">Lucknow</option>
+                    </select>
+                    <select name="city" id="City">
+                        <option value="Destination">DESTINATION</option>
+                        <option value="Delhi">Delhi</option>
+                        <option value="Mumbai">Mumbai</option>
+                        <option value="Pune">Pune</option>
+                        <option value="Lucknow">Lucknow</option>
+                    </select>
+                    <input type="Submit" value="SEARCH FOR A RIDE"><br>
+                    <input type="submit" value="You are a driver? 
+Post a Ride">
+                </form><br><br>
+            </div>
+            <div class="container">
+                <h2 id="form-title">New Registration</h2>
+                <form id="registration-form">
+                    <div class="form-group">
+                        <label for="name">Full Name:</label>
+                        <input type="text" id="register-name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email:</label>
+                        <input type="email" id="register-email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone Number:</label>
+                        <input type="tel" id="register-phone" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Create Password:</label>
+                        <input type="password" id="register-password" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password-confirm">Re-enter Password:</label>
+                        <input type="password" id="register-password-confirm" required>
+                    </div>
+                    <button class="btn" type="submit">Register</button>
+                    <button class="switch-btn" type="button" id="switch-to-login">Existing User? Login</button>
+                </form>
+
+                <form id="login-form" style="display: none">
+                    <div class="form-group">
+                        <label for="email">Email:</label>
+                        <input type="email" id="login-email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password:</label>
+                        <input type="password" id="login-password" required>
+                    </div>
+                    <p><a id="forget-password"
+                            style="text-decoration: underline; color: #007bff; cursor: pointer;">Forget Password</a></p>
+                    <button class="btn" type="submit">Login</button>
+                    <button class="switch-btn" type="button" id="switch-to-registration">New User? Register</button>
+                </form>
+            </div>
+            <div id="forget-password-modal" class="modal">
+                <div class="modal-content">
+                    <span class="close-modal" id="close-forget-password-modal">&times;</span>
+                    <h2>Forget Password</h2>
+                    <form class="modal-form" id="forget-password-form">
+                        <div class="form-group">
+                            <label for="email-phone">Email or Phone:</label>
+                            <input type="text" id="forget-password-email-phone" required>
+                        </div>
+                        <button class="btn" type="submit">Verify</button>
+                    </form>
+                    <button class="switch-btn" id="back-to-registration">Back to Registration</button>
+                </div>
+            </div>
+        </div>
+        <div id="services">
+            <div class="container3">
+                <div class="services-list">
+                    <div>
+                        <i class="fa-solid fa-code"></i>
+                        <h2>PASSENGERS</h2>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Error, laudantium? Est veniam non
+                            magnam perferendis fugiat aliquid possimus maxime sapiente accusantium cum repellendus unde
+                            aperiam fuga, incidunt qui magni voluptatibus.</p>
+                        <a href="#">Learn more</a>
+                    </div>
+                    <div>
+                        <i class="fa-sharp fa-solid fa-arrow-up-right-from-square"></i>
+                        <h2>DRIVERS</h2>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit similique quam
+                            necessitatibus facilis fugiat, quo non nostrum, aspernatur suscipit hic explicabo nobis
+                            dolores enim officia et quas quidem ab repellendus.</p>
+                        <a href="#">Learn more</a>
+                    </div>
+                    <div>
+                        <i class="fa-solid fa-database"></i>
+                        <h2>Rideshairing.com</h2>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam reprehenderit harum soluta,
+                            dolorum dolores modi ad hic maiores in sunt blanditiis ducimus sint veritatis tenetur
+                            pariatur possimus minus provident nihil.</p>
+                        <a href="#">Learn more</a>
+                    </div>
+                </div>
+            </div>
+            <a href="index.html" class="btn5">See more</a>
+        </div>
+    </div>
+
+    <script>
+        const registrationForm = document.getElementById("registration-form");
+        const loginForm = document.getElementById("login-form");
+        const switchToLoginButton = document.getElementById("switch-to-login");
+        const switchToRegistrationButton = document.getElementById("switch-to-registration");
+        const forgetPasswordLink = document.getElementById("forget-password");
+        const forgetPasswordModal = document.getElementById("forget-password-modal");
+        const closeForgetPasswordModal = document.getElementById("close-forget-password-modal");
+        const backToRegistration = document.getElementById("back-to-registration");
+
+        switchToLoginButton.addEventListener("click", () => {
+            registrationForm.style.display = "none";
+            loginForm.style.display = "block";
+            forgetPasswordModal.style.display = "none";
+            document.getElementById("form-title").textContent = "Login";
+        });
+
+        switchToRegistrationButton.addEventListener("click", () => {
+            loginForm.style.display = "none";
+            registrationForm.style.display = "block";
+            forgetPasswordModal.style.display = "none";
+            document.getElementById("form-title").textContent = "New Registration";
+        });
+
+        forgetPasswordLink.addEventListener("click", () => {
+            forgetPasswordModal.style.display = "block";
+        });
+
+        closeForgetPasswordModal.addEventListener("click", () => {
+            forgetPasswordModal.style.display = "none";
+        });
+
+        backToRegistration.addEventListener("click", () => {
+            forgetPasswordModal.style.display = "none";
+            registrationForm.style.display = "block";
+            document.getElementById("form-title").textContent = "New Registration";
+        });
+    </script>
+</body>
+
+</html>
